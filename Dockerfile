@@ -16,11 +16,6 @@ ARG MAVEN_SHA=b4880fb7a3d81edd190a029440cdf17f308621af68475a4fe976296e71ff4a4b54
 ARG WILDFLY_VERSION=15.0.1
 ARG JAVA_VERSION=8
 
-# Parameter for building an image dedicated to the dev in which the code is shared between the
-# docker container and the host on which will be ran the IDE. By default the main user group is
-# users (gid 100), so the user in the host should be also in that group.
-ARG USER_ID=1000
-
 COPY src/maven-deps.zip /tmp/
 
 RUN apt-get update && apt-get install -y \
@@ -44,15 +39,13 @@ RUN apt-get update && apt-get install -y \
     gpgv \
   && rm -rf /var/lib/apt/lists/* \
   && update-ca-certificates -f \
-  && useradd -g users -u ${USER_ID} -d /home/silveruser -ms /bin/bash silveruser \
   && mkdir -p /usr/share/maven /usr/share/maven/ref \
   && curl -fsSL -o /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
   && echo "${MAVEN_SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
   && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
   && rm -f /tmp/apache-maven.tar.gz \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \
-  && unzip /tmp/maven-deps.zip -d /home/silveruser/ \
-  && chown -R silveruser:users /home/silveruser/.m2 \
+  && unzip /tmp/maven-deps.zip -d /root/ \
   && curl -fsSL -o /tmp/swftools-bin-0.9.2.zip https://www.silverpeas.org/files/swftools-bin-0.9.2.zip \
   && echo 'd40bd091c84bde2872f2733a3c767b3a686c8e8477a3af3a96ef347cf05c5e43 *swftools-bin-0.9.2.zip' | sha256sum - \
   && unzip /tmp/swftools-bin-0.9.2.zip -d / \
@@ -62,7 +55,6 @@ RUN apt-get update && apt-get install -y \
   && curl -fsSL -o /tmp/wildfly-${WILDFLY_VERSION}.Final.FOR-TESTS.zip https://www.silverpeas.org/files/wildfly-${WILDFLY_VERSION}.Final.FOR-TESTS.zip \
   && mkdir /opt/wildfly-for-tests \
   && unzip /tmp/wildfly-${WILDFLY_VERSION}.Final.FOR-TESTS.zip -d /opt/wildfly-for-tests/ \
-  && chown -R silveruser:users /opt/wildfly-for-tests/ \
   && sed -i 's/\/home\/miguel\/tmp/\/opt\/wildfly-for-tests/g' /opt/wildfly-for-tests/wildfly-15.0.1.Final/standalone/configuration/standalone-full.xml \
   && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
   && echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen \
@@ -70,25 +62,23 @@ RUN apt-get update && apt-get install -y \
   && locale-gen \
   && update-locale LANG=${DEFAULT_LOCALE} LANGUAGE=${DEFAULT_LOCALE} LC_ALL=${DEFAULT_LOCALE}
 
-COPY src/inputrc /home/silveruser/.inputrc
-COPY src/settings.xml /home/silveruser/.m2/
+COPY src/settings.xml /root/.m2/
 
 ENV LANG ${DEFAULT_LOCALE}
 ENV LANGUAGE ${DEFAULT_LOCALE}
 ENV LC_ALL ${DEFAULT_LOCALE}
 ENV MAVEN_HOME /usr/share/maven
+ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64
 
-# By default, the build will be done in the default user's home directory
-USER silveruser
-WORKDIR /home/silveruser
+USER root
 
 # The GPG and SSL keys to use for respectively signing and then deploying the built artifact to
 # our Nexus server have to to be provided by an outside directory; therefore the below definition
 # of volumes.
 # WARNING: You have to link also two files in order to be able to deploy the build results and to
 # push commits:
-# - /home/silveruser/.m2/settings.xml and /home/silveruser/.m2/settings-security.xml files with your
+# - /root/.m2/settings.xml and /root/.m2/settings-security.xml files with your
 # own in order to sign and to deploy the artifact with Maven. In these files the GPG key, the SSL
 # passphrase as well as the remote servers must be defined.
-# - /home/silveruser/.m2/.gitconfig file with your own in order to be able to push any commits.
-VOLUME ["/home/silveruser/.ssh", "/home/silveruser/.gnupg"]
+# - /root/.m2/.gitconfig file with your own in order to be able to push any commits.
+VOLUME ["/root/.ssh", "/root/.gnupg"]
