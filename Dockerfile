@@ -63,6 +63,7 @@ RUN apt-get update && apt-get install -y \
   && update-locale LANG=${DEFAULT_LOCALE} LANGUAGE=${DEFAULT_LOCALE} LC_ALL=${DEFAULT_LOCALE}
 
 COPY src/settings.xml /root/.m2/
+COPY src/ooserver /usr/local/bin/
 
 ENV LANG ${DEFAULT_LOCALE}
 ENV LANGUAGE ${DEFAULT_LOCALE}
