@@ -37,6 +37,8 @@ RUN apt-get update && apt-get install -y \
     libreoffice-calc \
     libreoffice-impress \
     gpgv \
+  && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+  && apt-get install -y nodejs \
   && rm -rf /var/lib/apt/lists/* \
   && update-ca-certificates -f \
   && mkdir -p /usr/share/maven /usr/share/maven/ref \
