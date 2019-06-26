@@ -1,6 +1,7 @@
 #
-# This Dockerfile was prepared from the Dockerfile for the Maven project and it was adapted to
-# our own need.
+# This Dockerfile is dedicated to our CI service to build our projects driven by Maven or Gradle.
+# The builds are performed as the user silverbuild and not as root. So, it is required the user id
+# and group id are those of the user as whom the CI service is running.
 #
 FROM ubuntu:bionic
 
@@ -24,6 +25,7 @@ ARG GROUP_ID=119
 COPY src/maven-deps.zip /tmp/
 
 RUN apt-get update && apt-get install -y \
+    iputils-ping \
     vim \
     curl \
     git \
@@ -54,7 +56,6 @@ RUN apt-get update && apt-get install -y \
   && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
   && rm -f /tmp/apache-maven.tar.gz \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \
-  && unzip /tmp/maven-deps.zip -d /root/ \
   && unzip /tmp/maven-deps.zip -d /home/silverbuild/ \
   && curl -fsSL -o /tmp/swftools-bin-0.9.2.zip https://www.silverpeas.org/files/swftools-bin-0.9.2.zip \
   && echo 'd40bd091c84bde2872f2733a3c767b3a686c8e8477a3af3a96ef347cf05c5e43 *swftools-bin-0.9.2.zip' | sha256sum - \
@@ -72,7 +73,6 @@ RUN apt-get update && apt-get install -y \
   && locale-gen \
   && update-locale LANG=${DEFAULT_LOCALE} LANGUAGE=${DEFAULT_LOCALE} LC_ALL=${DEFAULT_LOCALE}
 
-COPY src/settings.xml /root/.m2/
 COPY src/settings.xml /home/silverbuild/.m2/
 COPY src/ooserver /usr/local/bin/
 
@@ -90,11 +90,11 @@ USER silverbuild
 # The GPG and SSL keys to use for respectively signing and then deploying the built artifact to
 # our Nexus server have to to be provided by an outside directory; therefore the below definition
 # of volumes.
-# WARNING: You have to link also two files in order to be able to deploy the build results and to
-# push commits:
-# - either ${user}/.m2/settings.xml and ${user}/.m2/settings-security.xml files (with user as
-# either /root or /home/silverbuild) with your own in order to sign and to deploy the artifact with
+# WARNING: You have to link also the below files or directories in order to be able to deploy the
+# build results and to push commits:
+# - /home/silverbuild/.m2/settings.xml and /home/silverbuild/.m2/settings-security.xml files
+# with the ones of the CI service user in order to sign and to deploy the artifact with
 # Maven. In these files the GPG key, the SSL passphrase as well as the remote servers must be defined.
-# - ${user}/.m2/.gitconfig file (with user as either /root or /home/silverbuild) with your own in
-# order to be able to push any commits.
-VOLUME ["/root/.ssh", "/root/.gnupg", "/home/silverbuild/.ssh", "/home/silverbuild/.gnupg"]
+# - /home/silverbuild/.m2/.gitconfig file with the ones of the CI service user in order to be able
+# to push any commits.
+VOLUME ["/home/silverbuild/.ssh", "/home/silverbuild/.gnupg"]
