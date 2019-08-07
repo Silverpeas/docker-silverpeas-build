@@ -5,7 +5,7 @@
 #
 FROM ubuntu:bionic
 
-LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.1 build=15
+LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.1 build=16
 MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
 
 ENV TERM=xterm
