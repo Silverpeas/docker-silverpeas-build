@@ -5,7 +5,7 @@
 #
 FROM ubuntu:bionic
 
-LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.1 build=16
+LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.1 build=17
 MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
 
 ENV TERM=xterm
@@ -45,6 +45,7 @@ RUN apt-get update && apt-get install -y \
     libreoffice-calc \
     libreoffice-impress \
     gpgv \
+    groovy \
   && groupadd -g ${GROUP_ID} silverbuild \
   && useradd -u ${USER_ID} -g ${GROUP_ID} -d /home/silverbuild -s /bin/bash -m silverbuild \
   && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
