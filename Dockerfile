@@ -5,7 +5,7 @@
 #
 FROM ubuntu:bionic
 
-LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.1 build=18
+LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.1 build=19
 MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
 
 ENV TERM=xterm
@@ -14,8 +14,8 @@ ENV TERM=xterm
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
 ARG MAVEN_VERSION=3.6.3
 ARG MAVEN_SHA=c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe726c17ef8dcca2dcaa9fca676987befeadc9b9f759967a8cb77181c0
-ARG WILDFLY_VERSION=18.0.1
-ARG JAVA_VERSION=8
+ARG WILDFLY_VERSION=20.0.0
+ARG JAVA_VERSION=11
 
 # Users to use by the CI service to build projects. Required if you whish to avoid some security
 # restrictions. Should be the user and group as whom the CI service is running.
