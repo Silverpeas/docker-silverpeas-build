@@ -3,9 +3,9 @@
 # The builds are performed as the user silverbuild and not as root. So, it is required the user id
 # and group id are those of the user as whom the CI service is running.
 #
-FROM ubuntu:bionic
+FROM ubuntu:focal
 
-LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.2 build=1
+LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.2 build=2
 MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
 
 ENV TERM=xterm
