@@ -5,7 +5,7 @@
 #
 FROM ubuntu:focal
 
-LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.2 build=2
+LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.2 build=3
 MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
 
 ENV TERM=xterm
@@ -94,6 +94,9 @@ ENV LANGUAGE ${DEFAULT_LOCALE}
 ENV LC_ALL ${DEFAULT_LOCALE}
 ENV MAVEN_HOME /usr/share/maven
 ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64
+
+# Ensure signals are forwarded to the JVM process correctly for graceful shutdown
+ENV LAUNCH_JBOSS_IN_BACKGROUND true
 
 USER silverbuild
 
