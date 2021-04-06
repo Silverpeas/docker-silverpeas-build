@@ -15,9 +15,9 @@ ENV TZ=Europe/Paris
 
 # Parameters whose values are required for the tests to succeed
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
-ARG MAVEN_VERSION=3.6.3
-ARG MAVEN_SHA=c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe726c17ef8dcca2dcaa9fca676987befeadc9b9f759967a8cb77181c0
-ARG WILDFLY_VERSION=20.0.1
+ARG MAVEN_VERSION=3.8.1
+ARG MAVEN_SHA=0ec48eb515d93f8515d4abe465570dfded6fa13a3ceb9aab8031428442d9912ec20f066b2afbf56964ffe1ceb56f80321b50db73cf77a0e2445ad0211fb8e38d
+ARG WILDFLY_VERSION=23.0.0
 ARG JAVA_VERSION=11
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -76,7 +76,6 @@ RUN apt-get update && apt-get install -y \
   && curl -fsSL -o /tmp/wildfly-${WILDFLY_VERSION}.Final.FOR-TESTS.zip https://www.silverpeas.org/files/wildfly-${WILDFLY_VERSION}.Final.FOR-TESTS.zip \
   && mkdir /opt/wildfly-for-tests \
   && unzip /tmp/wildfly-${WILDFLY_VERSION}.Final.FOR-TESTS.zip -d /opt/wildfly-for-tests/ \
-  && sed -i 's/\/home\/miguel\/tmp/\/opt\/wildfly-for-tests/g' /opt/wildfly-for-tests/wildfly-${WILDFLY_VERSION}.Final/standalone/configuration/standalone-full.xml \
   && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
   && echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen \
   && echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen \
@@ -84,7 +83,6 @@ RUN apt-get update && apt-get install -y \
   && update-locale LANG=${DEFAULT_LOCALE} LANGUAGE=${DEFAULT_LOCALE} LC_ALL=${DEFAULT_LOCALE}
 
 COPY src/settings.xml /home/silverbuild/.m2/
-COPY src/ooserver /usr/local/bin/
 
 RUN chown -R silverbuild:silverbuild /home/silverbuild \
   && chown -R silverbuild:silverbuild /opt/wildfly-for-tests
