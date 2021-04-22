@@ -10,14 +10,14 @@ MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
 
 ENV TERM=xterm
 
-# Environment variables required for the tests to succeed
+# Non generic time zone. Tests should succeed whatever the time zone.
 ENV TZ=Europe/Paris
 
 # Parameters whose values are required for the tests to succeed
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
 ARG MAVEN_VERSION=3.8.1
 ARG MAVEN_SHA=0ec48eb515d93f8515d4abe465570dfded6fa13a3ceb9aab8031428442d9912ec20f066b2afbf56964ffe1ceb56f80321b50db73cf77a0e2445ad0211fb8e38d
-ARG WILDFLY_VERSION=23.0.0
+ARG WILDFLY_VERSION=23.0.1
 ARG JAVA_VERSION=11
 
 ARG DEBIAN_FRONTEND=noninteractive
