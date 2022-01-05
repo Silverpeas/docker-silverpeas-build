@@ -14,11 +14,12 @@ ENV TERM=xterm
 ENV TZ=Europe/Paris
 
 # Parameters whose values are required for the tests to succeed
+ARG WILDFLY_VERSION=24.0.1
+ARG JAVA_VERSION=11
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
 ARG MAVEN_VERSION=3.8.4
 ARG MAVEN_SHA=a9b2d825eacf2e771ed5d6b0e01398589ac1bfa4171f36154d1b5787879605507802f699da6f7cfc80732a5282fd31b28e4cd6052338cbef0fa1358b48a5e3c8
-ARG WILDFLY_VERSION=24.0.1
-ARG JAVA_VERSION=11
+ARG NODEJS_VERSION=16
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -56,7 +57,7 @@ RUN apt-get update && apt-get install -y \
     groovy \
   && groupadd -g ${GROUP_ID} silverbuild \
   && useradd -u ${USER_ID} -g ${GROUP_ID} -d /home/silverbuild -s /bin/bash -m silverbuild \
-  && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+  && curl -sL https://deb.nodesource.com/setup_${NODEJS_VERSION}.x | bash - \
   && apt-get install -y nodejs \
   && rm -rf /var/lib/apt/lists/* \
   && update-ca-certificates -f \
