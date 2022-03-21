@@ -56,7 +56,7 @@ RUN apt-get update && apt-get install -y \
     groovy \
   && groupadd -g ${GROUP_ID} silverbuild \
   && useradd -u ${USER_ID} -g ${GROUP_ID} -d /home/silverbuild -s /bin/bash -m silverbuild \
-  && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+  && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
   && apt-get install -y nodejs \
   && rm -rf /var/lib/apt/lists/* \
   && update-ca-certificates -f \
