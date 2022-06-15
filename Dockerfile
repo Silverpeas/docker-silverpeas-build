@@ -5,7 +5,7 @@
 #
 FROM ubuntu:focal
 
-LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.3
+LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.3 build=1
 MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
 
 ENV TERM=xterm
@@ -14,11 +14,11 @@ ENV TERM=xterm
 ENV TZ=Europe/Paris
 
 # Parameters whose values are required for the tests to succeed
-ARG WILDFLY_VERSION=24.0.1
+ARG WILDFLY_VERSION=26.1.1
 ARG JAVA_VERSION=11
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
-ARG MAVEN_VERSION=3.8.4
-ARG MAVEN_SHA=a9b2d825eacf2e771ed5d6b0e01398589ac1bfa4171f36154d1b5787879605507802f699da6f7cfc80732a5282fd31b28e4cd6052338cbef0fa1358b48a5e3c8
+ARG MAVEN_VERSION=3.8.6
+ARG MAVEN_SHA=f790857f3b1f90ae8d16281f902c689e4f136ebe584aba45e4b1fa66c80cba826d3e0e52fdd04ed44b4c66f6d3fe3584a057c26dfcac544a60b301e6d0f91c26
 ARG NODEJS_VERSION=16
 
 ARG DEBIAN_FRONTEND=noninteractive
