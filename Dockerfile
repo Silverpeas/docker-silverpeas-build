@@ -3,9 +3,9 @@
 # The builds are performed as the user silverbuild and not as root. So, it is required the user id
 # and group id are those of the user as whom the CI service is running.
 #
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
-LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.3
+LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=6.4 build=1
 MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
 
 ENV TERM=xterm
@@ -14,12 +14,12 @@ ENV TERM=xterm
 ENV TZ=Europe/Paris
 
 # Parameters whose values are required for the tests to succeed
-ARG WILDFLY_VERSION=26.1.1
+ARG WILDFLY_VERSION=26.1.3
 ARG JAVA_VERSION=11
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
-ARG MAVEN_VERSION=3.8.6
-ARG MAVEN_SHA=f790857f3b1f90ae8d16281f902c689e4f136ebe584aba45e4b1fa66c80cba826d3e0e52fdd04ed44b4c66f6d3fe3584a057c26dfcac544a60b301e6d0f91c26
-ARG NODEJS_VERSION=16
+ARG MAVEN_VERSION=3.9.1
+ARG MAVEN_SHA=d3be5956712d1c2cf7a6e4c3a2db1841aa971c6097c7a67f59493a5873ccf8c8b889cf988e4e9801390a2b1ae5a0669de07673acb090a083232dbd3faf82f3e3
+ARG NODEJS_VERSION=18
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -30,7 +30,7 @@ ARG GROUP_ID=119
 
 COPY src/maven-deps.zip /tmp/
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-utils \
     iputils-ping \
     vim \
