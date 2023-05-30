@@ -17,8 +17,8 @@ ENV TZ=Europe/Paris
 ARG WILDFLY_VERSION=26.1.3
 ARG JAVA_VERSION=11
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
-ARG MAVEN_VERSION=3.9.1
-ARG MAVEN_SHA=d3be5956712d1c2cf7a6e4c3a2db1841aa971c6097c7a67f59493a5873ccf8c8b889cf988e4e9801390a2b1ae5a0669de07673acb090a083232dbd3faf82f3e3
+ARG MAVEN_VERSION=3.8.8
+ARG MAVEN_SHA=332088670d14fa9ff346e6858ca0acca304666596fec86eea89253bd496d3c90deae2be5091be199f48e09d46cec817c6419d5161fb4ee37871503f472765d00
 ARG NODEJS_VERSION=18
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -62,7 +62,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/* \
   && update-ca-certificates -f \
   && mkdir -p /usr/share/maven /usr/share/maven/ref \
-  && curl -fsSL -o /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+  && curl -fsSL -o /tmp/apache-maven.tar.gz https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
   && echo "${MAVEN_SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
   && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
   && rm -f /tmp/apache-maven.tar.gz \
