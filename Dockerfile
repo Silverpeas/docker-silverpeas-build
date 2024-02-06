@@ -16,6 +16,7 @@ ENV TZ=Europe/Paris
 # Parameters whose values are required for the tests to succeed
 ARG WILDFLY_VERSION=26.1.3
 ARG JAVA_VERSION=11
+ARG SONAR_JAVA_VERSION=17
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
 ARG MAVEN_VERSION=3.8.8
 ARG MAVEN_SHA=332088670d14fa9ff346e6858ca0acca304666596fec86eea89253bd496d3c90deae2be5091be199f48e09d46cec817c6419d5161fb4ee37871503f472765d00
@@ -47,6 +48,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zip \
     unzip \
     openjdk-${JAVA_VERSION}-jdk \
+    openjdk-${SONAR_JAVA_VERSION}-jdk \
     ffmpeg \
     imagemagick \
     ghostscript \
