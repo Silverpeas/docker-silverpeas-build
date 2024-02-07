@@ -95,6 +95,7 @@ ENV LANGUAGE ${DEFAULT_LOCALE}
 ENV LC_ALL ${DEFAULT_LOCALE}
 ENV MAVEN_HOME /usr/share/maven
 ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64
+ENV SONAR_JDK_VERSION /usr/lib/jvm/java-${SONAR_JAVA_VERSION}-openjdk-amd64
 
 # Ensure signals are forwarded to the JVM process correctly for graceful shutdown
 ENV LAUNCH_JBOSS_IN_BACKGROUND true
