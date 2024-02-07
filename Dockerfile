@@ -5,7 +5,7 @@
 #
 FROM ubuntu:jammy
 
-LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=latest build=1
+LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=latest build=2
 MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
 
 ENV TERM=xterm
@@ -14,7 +14,7 @@ ENV TERM=xterm
 ENV TZ=Europe/Paris
 
 # Parameters whose values are required for the tests to succeed
-ARG WILDFLY_VERSION=26.1.1
+ARG WILDFLY_VERSION=26.1.3
 ARG JAVA_VERSION=11
 ARG SONAR_JAVA_VERSION=17
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
