@@ -1,6 +1,6 @@
 # docker-silverpeas-build
 
-A `Dockerfile` that produces a Docker image ready to build a [Silverpeas 6](http://www.silverpeas.org) 
+A `Dockerfile` that produces a Docker image ready to build a [Silverpeas 6](https://www.silverpeas.org) 
 project.
 
 Such an image is dedicated to be used by our own integration continuous service for building 
