@@ -14,7 +14,7 @@ ENV TERM=xterm
 ENV TZ=Europe/Paris
 
 # Parameters whose values are required for the tests to succeed
-ARG WILDFLY_VERSION=26.1.1
+ARG WILDFLY_VERSION=26.1.3
 ARG JAVA_VERSION=11
 ARG SONAR_JAVA_VERSION=17
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
