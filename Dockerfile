@@ -3,9 +3,9 @@
 # The builds are performed as the user silverbuild and not as root. So, it is required the user id
 # and group id are those of the user as whom the CI service is running.
 #
-FROM ubuntu:jammy
+FROM ubuntu:noble
 
-LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=latest build=1
+LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=latest build=2
 MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
 
 ENV TERM=xterm
@@ -18,9 +18,9 @@ ARG WILDFLY_VERSION=26.1.3
 ARG JAVA_VERSION=11
 ARG SONAR_JAVA_VERSION=17
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
-ARG MAVEN_VERSION=3.9.8
-ARG MAVEN_SHA=7d171def9b85846bf757a2cec94b7529371068a0670df14682447224e57983528e97a6d1b850327e4ca02b139abaab7fcb93c4315119e6f0ffb3f0cbc0d0b9a2
-ARG NODEJS_VERSION=20
+ARG MAVEN_VERSION=3.9.11
+ARG MAVEN_SHA=bcfe4fe305c962ace56ac7b5fc7a08b87d5abd8b7e89027ab251069faebee516b0ded8961445d6d91ec1985dfe30f8153268843c89aa392733d1a3ec956c9978
+ARG NODEJS_VERSION=24
 
 ARG DEBIAN_FRONTEND=noninteractive
 
