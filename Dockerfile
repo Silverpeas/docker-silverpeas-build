@@ -5,8 +5,16 @@
 #
 FROM ubuntu:noble
 
-LABEL name="Silverpeas Build" description="An image to build a Silverpeas project" vendor="Silverpeas" version=latest build=3
-MAINTAINER Miguel Moquillon "miguel.moquillon@silverpeas.org"
+LABEL name="Silverpeas Build"
+LABEL description="An image to build a Silverpeas project"
+LABEL version=latest
+LABEL build=1
+
+LABEL org.opencontainers.image.title="Silverpeas build image"
+LABEL org.opencontainers.image.description="Docker image providing a reproductible environment to build Silverpeas projects"
+LABEL org.opencontainers.image.vendor="Silverpeas"
+LABEL org.opencontainers.image.authors="Miguel Moquillon <miguel.moquillon@silverpeas.org>"
+LABEL org.opencontainers.image.licenses="AGPLv3"
 
 ENV TERM=xterm
 
