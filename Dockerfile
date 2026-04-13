@@ -90,15 +90,15 @@ COPY src/settings.xml /home/silverbuild/.m2/
 RUN chown -R silverbuild:silverbuild /home/silverbuild \
   && chown -R silverbuild:silverbuild /opt/wildfly-for-tests
 
-ENV LANG ${DEFAULT_LOCALE}
-ENV LANGUAGE ${DEFAULT_LOCALE}
-ENV LC_ALL ${DEFAULT_LOCALE}
-ENV MAVEN_HOME /usr/share/maven
-ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64
-ENV SONAR_JDK_HOME /usr/lib/jvm/java-${SONAR_JAVA_VERSION}-openjdk-amd64
+ENV LANG=${DEFAULT_LOCALE}
+ENV LANGUAGE=${DEFAULT_LOCALE}
+ENV LC_ALL=${DEFAULT_LOCALE}
+ENV MAVEN_HOME=/usr/share/maven
+ENV JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64
+ENV SONAR_JDK_HOME=/usr/lib/jvm/java-${SONAR_JAVA_VERSION}-openjdk-amd64
 
 # Ensure signals are forwarded to the JVM process correctly for graceful shutdown
-ENV LAUNCH_JBOSS_IN_BACKGROUND true
+ENV LAUNCH_JBOSS_IN_BACKGROUND=true
 
 USER silverbuild
 
