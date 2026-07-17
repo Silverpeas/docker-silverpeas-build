@@ -8,7 +8,7 @@ FROM ubuntu:noble
 LABEL name="Silverpeas Build"
 LABEL description="An image to build a Silverpeas project"
 LABEL version=latest
-LABEL build=1
+LABEL build=2
 
 LABEL org.opencontainers.image.title="Silverpeas build image"
 LABEL org.opencontainers.image.description="Docker image providing a reproductible environment to build Silverpeas projects"
