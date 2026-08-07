@@ -3,7 +3,7 @@
 # The builds are performed as the user silverbuild and not as root. So, it is required the user id
 # and group id are those of the user as whom the CI service is running.
 #
-FROM ubuntu:noble
+FROM ubuntu:jammy
 
 LABEL name="Silverpeas Build"
 LABEL description="An image to build a Silverpeas project"
@@ -22,8 +22,8 @@ ENV TERM=xterm
 ENV TZ=Europe/Paris
 
 # Parameters whose values are required for the tests to succeed
-ARG WILDFLY_VERSION=34.0.1
-ARG JAVA_VERSION=17
+ARG WILDFLY_VERSION=26.1.3
+ARG JAVA_VERSION=11
 ARG SONAR_JAVA_VERSION=21
 ARG DEFAULT_LOCALE=fr_FR.UTF-8
 ARG MAVEN_VERSION=3.9.16
