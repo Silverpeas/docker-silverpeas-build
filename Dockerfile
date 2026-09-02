@@ -87,6 +87,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && curl -fsSL -o /tmp/wildfly-${WILDFLY_VERSION}.Final.FOR-TESTS.zip https://www.silverpeas.org/files/wildfly-${WILDFLY_VERSION}.Final.FOR-TESTS.zip \
   && mkdir /opt/wildfly-for-tests \
   && unzip /tmp/wildfly-${WILDFLY_VERSION}.Final.FOR-TESTS.zip -d /opt/wildfly-for-tests/ \
+  && mkdir /home/silverbuild/.gradle \
   && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
   && echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen \
   && echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen \
